@@ -24,7 +24,12 @@ module.exports = function (grunt) {
 
   // Define the configuration for all the tasks
   grunt.initConfig({
-
+    'gh-pages': {
+      options: {
+        base: 'dist'
+      },
+      src: ['**']
+    },
     // Project settings
     pkg: grunt.file.readJSON('package.json'),
     yeoman: {
@@ -669,4 +674,5 @@ module.exports = function (grunt) {
     'test',
     'build'
   ]);
+  grunt.loadNpmTasks('grunt-gh-pages');
 };

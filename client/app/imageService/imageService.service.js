@@ -22,7 +22,7 @@ angular.module('frontTestApp')
       function getImages() {
         var request = $http({
           method: "get",
-          url: "/app/images.json"
+          url: "/assets/images/images.json"
         });
 
         return( request.then( handleSuccess, handleError ) );
