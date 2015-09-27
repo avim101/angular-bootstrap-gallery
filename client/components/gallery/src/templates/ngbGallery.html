@@ -1,0 +1,95 @@
+<div id="galleryWrap">
+<div class="container">
+  <div class="row action-bar">
+    <div class="col-sm-12 col-md-3 padding-15">
+      <div class="gallery-sort-input">
+        <div class="input-group ">
+            <span class="input-group-btn ">
+              <button class="btn btn-info" type="button">
+                <i class="glyphicon" ng-class="sortReverse ? 'glyphicon-sort-by-attributes-alt' : 'glyphicon-sort-by-attributes'" ng-click="sortReverse = !sortReverse"></i>
+              </button>
+            </span>
+          <span class="sorting-type" ng-click="sortBy = 'title'" ng-class="{activeSort: sortBy === 'title'}">Title</span>
+          <span class="sorting-type" ng-click="sortBy = 'date'" ng-class="{activeSort: sortBy === 'date'}">Date</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-6">
+        <div class="col-sm-8 col-md-10" ng-show="paginationBar">
+          <div class="center">
+               <pagination total-items="feed.length"
+                           ng-model="currentPage"
+                           max-size="maxSize"
+                           class="pagination-sm"
+                           items-per-page="itemsInPage"
+                           rotate="false">
+               </pagination>
+            </div>
+          </div>
+        <div class="col-sm-4 col-md-2" ng-show="paginationBar">
+          <div class="center">
+        <div class="btn-group dd-input-wrap" dropdown is-open="status.isopen">
+          <button id="single-button" class="btn btn-sm dd-input" type="button" class="btn btn-primary" dropdown-toggle>
+            <span class="dd-text">{{itemsInPage}}</span>
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
+            <li role="menuitem" ng-click="itemsInPage = 5">
+              <a href="#">5</a>
+            </li>
+            <li role="menuitem" ng-click="itemsInPage = 10">
+              <a href="#">10</a>
+            </li>
+            <li role="menuitem" ng-click="itemsInPage = 15">
+              <a href="#">15</a>
+            </li>
+            <li role="menuitem" ng-click="itemsInPage = 20">
+              <a href="#">20</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-3 padding-15" ng-show="searchBox">
+      <div class="gallery-search-input">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" ng-model="searchInput"/>
+            <span class="input-group-btn">
+              <button class="btn btn-info" type="button">
+                <i class="glyphicon glyphicon-search"></i>
+              </button>
+            </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4  gallery-img padding-15" ng-class="{'no-padding-left': $even}" ng-repeat="image in filteredFeed | filter:searchInput | orderBy:sortBy:sortReverse:'index' track by $index">
+      <div class="gallery-img" ng-style="{'background-image':'url(' + image.url + ')'}">
+        <div class="img-layover">
+              <div class="fl-btn-wrap" ng-class="{'show' : showSubBtns === true}">
+                <div>
+                  <button class="sub_fab_btn" style="background-color:#DB4A39;" ng-click="removeImg(image)">
+                    <span class="fa fa-trash-o" style="color: #fffff;"></span>
+                  </button>
+                </div>
+                <div>
+                  <button class="sub_fab_btn" style="background-color:#3B5998;" ng-click="openImage(image)">
+                    <span class="fa fa-expand" style="color: #fffff;"></span>
+                  </button>
+                </div>
+              </div>
+              <button class="fl-btn-main" ng-click="showSubBtns = !showSubBtns" ng-class="{'rotate': showSubBtns === true}">
+                <span class="ink animate"></span>
+                <i class="fa fa-bars" ng-show="!showSubBtns"></i>
+                <i class="fa fa-plus"  ng-show="showSubBtns === true"></i>
+              </button>
+          <h5>{{image.title}}</h5>
+          <small>{{image.date | date : 'fullDate'}}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

@@ -1,0 +1,30 @@
+<div id="imageModal">
+  <div class="modal-body">
+    <div class="gallery-img" ng-style="{'background-image':'url(' + selectedImage.url + ')'}">
+      <div class="img-layover">
+        <div class="fl-btn-wrap" ng-class="{'show' : showSubBtns === true}">
+            <button class="sub_fab_btn" ng-click="prev()">
+              <i class="glyphicon glyphicon-chevron-left"></i>
+            </button>
+            <button ng-if="!isPlaying" class="sub_fab_btn" ng-click="play()">
+              <i class="glyphicon glyphicon-play"></i>
+            </button>
+            <button ng-if="isPlaying" class="sub_fab_btn"  style="background-color:#DB4A39;" ng-click="pause()">
+              <i class="glyphicon glyphicon-pause"></i>
+            </button>
+          <button class="sub_fab_btn" ng-click="next()">
+          <i class="glyphicon glyphicon-chevron-right"></i>
+          </button>
+        </div>
+        <button class="fl-btn-main" ng-click="showSubBtns = !showSubBtns" ng-class="{'rotate': showSubBtns === true}">
+          <span class="ink animate"></span>
+          <i class="fa fa-bars" ng-show="!showSubBtns"></i>
+          <i class="fa fa-plus"  ng-show="showSubBtns === true"></i>
+        </button>
+        <h3>{{selectedImage.title}}</h3>
+        <h5>{{selectedImage.date | date : 'medium'}}</h5>
+      </div>
+    </div>
+    <!--<i class="modal-nav glyphicon glyphicon-chevron-left" ng-class="index === 0 ? 'disable-nav': ''" ng-click='prev()'></i><center><img ng-src={{selectedImage.url}} fallback-src="http://www.suplugins.com/podium/images/placeholder-03.png" /></center><i class="modal-nav glyphicon glyphicon-chevron-right" ng-class="index === images.length ? 'disable-nav': ''" ng-click='next()'></i>-->
+  </div>
+</div>
